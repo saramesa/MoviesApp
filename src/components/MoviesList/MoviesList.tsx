@@ -1,5 +1,7 @@
 import React, {FC} from 'react';
-import {ActivityIndicator, FlatList, Text} from 'react-native';
+import {ActivityIndicator, FlatList} from 'react-native';
+
+import CustomText from '../CustomText';
 
 interface MoviesListProps {
   movies: any;
@@ -8,15 +10,20 @@ interface MoviesListProps {
   hasNextPage: any;
 }
 
-const MoviesList: FC<MoviesListProps> = ({movies, fetchNextPage, isFetchingNextPage, hasNextPage}) => {
+const MoviesList: FC<MoviesListProps> = ({
+  movies,
+  fetchNextPage,
+  isFetchingNextPage,
+  hasNextPage,
+}) => {
   return (
     <FlatList
       data={movies}
       keyExtractor={item => `${item.id.toString()}-${item.title}`}
-      renderItem={({item}) => <Text>{item.title}</Text>}
+      renderItem={({item}) => <CustomText>{item.title}</CustomText>}
       onEndReached={hasNextPage ? () => fetchNextPage() : undefined}
       onEndReachedThreshold={0.1}
-      ListFooterComponent={isFetchingNextPage ? <ActivityIndicator/> : null}
+      ListFooterComponent={isFetchingNextPage ? <ActivityIndicator /> : null}
     />
   );
 };

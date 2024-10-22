@@ -1,8 +1,9 @@
 import React from 'react';
-import {ActivityIndicator, Text} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 
 import useGetMovies from '../../hooks/useGetMovies';
 import MoviesList from '../../components/MoviesList';
+import CustomText from '../../components/CustomText';
 
 const Home = () => {
   const {
@@ -19,7 +20,7 @@ const Home = () => {
   }
 
   if (error) {
-    return <Text>Failed to get movies</Text>;
+    return <CustomText>Failed to get movies</CustomText>;
   }
 
   const movies = data?.pages.flatMap(page => page.results) || [];
