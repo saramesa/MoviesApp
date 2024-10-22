@@ -1,10 +1,11 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
 
-import fetchMovies from '../services/fetchMovies';
+import fetchMovies from '../services/fetchMovies/fetchMovies';
 import {QueryKeys} from '../queryKeys';
+import { MoviesResponse } from '../services/fetchMovies/types';
 
 const useGetMovies = () => {
-  return useInfiniteQuery(
+  return useInfiniteQuery<MoviesResponse, Error>(
     [QueryKeys.MOVIES_LIST],
     ({ pageParam = 1 }: { pageParam?: number }) => fetchMovies(pageParam),
     {
