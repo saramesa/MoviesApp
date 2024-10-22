@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {ActivityIndicator, FlatList} from 'react-native';
 
 import MovieCard from '../MovieCard';
-
+//TO DO type this
 interface MoviesListProps {
   movies: any;
   fetchNextPage: any;

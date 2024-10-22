@@ -1,28 +1,33 @@
 import React, {FC} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {styles} from './styles';
 import {Movie} from '../../services/fetchMovies/types';
 import CustomText from '../CustomText';
+import {MainStackParamList} from '../../navigation/types';
+import {getImageUri} from '../../helpers/getImageUri';
 
 interface MovieItemProps {
   movie: Movie;
 }
 
-const getUri = (path: string) => {
-  return `https://image.tmdb.org/t/p/original/${path}`;
-};
-
 const MovieItem: FC<MovieItemProps> = ({movie}) => {
-  const onPress = () => {
-    console.log('it should navigate to detail');
+  const navigation =
+    useNavigation<NativeStackNavigationProp<MainStackParamList>>();
+  const handleOnCardPress = (movieId: number) => {
+    navigation.navigate('MovieDetail', {movieId});
   };
+
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => handleOnCardPress(movie.id)}>
       {movie.poster_path && (
         <Image
           source={{
-            uri: getUri(movie.poster_path),
+            uri: getImageUri(movie.poster_path),
           }}
           style={styles.image}
         />

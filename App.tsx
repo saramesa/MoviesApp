@@ -11,12 +11,14 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Theme} from '@react-navigation/native';
 
-import HomeScreen from './src/screens/Home';
 import SettingsScreen from './src/screens/Settings';
 import {ThemeProvider} from './src/theme/ThemeProvider';
 import {darkTheme, lightTheme} from './src/theme/theme';
+import AppNavigator from './src/navigation/AppNavigator';
+
 const queryClient = new QueryClient();
 const Tab = createBottomTabNavigator();
+
 
 const App = () => {
   const [theme, setTheme] = useState<Theme>(lightTheme);
@@ -28,8 +30,9 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme} toggleTheme={toggleTheme}>
         <NavigationContainer theme={theme}>
+
           <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Movies" component={AppNavigator} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
           </Tab.Navigator>
         </NavigationContainer>
