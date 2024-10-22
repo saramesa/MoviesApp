@@ -1,7 +1,8 @@
 import React from 'react';
-import {ActivityIndicator, FlatList, Text, View} from 'react-native';
+import {ActivityIndicator, Text} from 'react-native';
 
 import useGetMovies from '../../hooks/useGetMovies';
+import MoviesList from '../../components/MoviesList';
 
 const Home = () => {
   const {
@@ -12,28 +13,41 @@ const Home = () => {
     isLoading,
     error,
   } = useGetMovies();
-  console.log('data ', data);
+
   if (isLoading) {
     return <ActivityIndicator />;
   }
 
   if (error) {
-    return <Text>Failed to fetch movies</Text>;
+    return <Text>Failed to get movies</Text>;
   }
 
-  const movies = data?.pages.flatMap((page) => page.results) || [];
+  const movies = data?.pages.flatMap(page => page.results) || [];
+
   return (
-    <View>
-      <FlatList
-        data={movies}
-        renderItem={({ item }) => <Text key={item.id}>{item.title}</Text>}
-        keyExtractor={(item) => item.id.toString()}
-        onEndReached={hasNextPage ? () => fetchNextPage() : undefined}
-        onEndReachedThreshold={0.1}
-        ListFooterComponent={isFetchingNextPage ? <ActivityIndicator /> : null}
-      />
-    </View>
+    <MoviesList
+      movies={movies}
+      fetchNextPage={fetchNextPage}
+      isFetchingNextPage={isFetchingNextPage}
+      hasNextPage={hasNextPage}
+    />
   );
 };
 
 export default Home;
+
+//{"adult": false,
+//  "backdrop_path": "/9SSEUrSqhljBMzRe4aBTh17rUaC.jpg",
+//"genre_ids": [878, 27],
+//"id": 945961,
+//"original_language": "en",
+//"original_title": "Alien: Romulus",
+//"overview": "While scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe.",
+//"popularity": 5036.941,
+//"poster_path": "/b33nnKl1GSFbao4l3fZDDqsMx0F.jpg",
+//"release_date": "2024-08-13",
+//"title": "Alien: Romulus",
+//"video": false,
+//"vote_average": 7.286,
+//"vote_count": 1764
+//},

@@ -6,7 +6,7 @@ import {QueryKeys} from '../queryKeys';
 const useGetMovies = () => {
   return useInfiniteQuery(
     [QueryKeys.MOVIES_LIST],
-    ({pageParam = 1}) => fetchMovies(pageParam),
+    ({ pageParam = 1 }: { pageParam?: number }) => fetchMovies(pageParam),
     {
       getNextPageParam: lastPage => {
         return lastPage.page < lastPage.total_pages
