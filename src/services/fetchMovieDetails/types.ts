@@ -3,7 +3,7 @@ interface Genre {
   name: string;
 }
 
-export interface MovieDetails {
+export interface MovieDetailsResponse {
   adult: boolean;
   backdrop_path: string | null;
   budget: number;

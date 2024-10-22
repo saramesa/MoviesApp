@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 import {TMDB_API_KEY} from '@env';
-import {MovieDetails} from './types';
+import {MovieDetailsResponse} from './types';
 
-const fetchMovieDetails = async (movieId: number): Promise<MovieDetails> => {
+const fetchMovieDetails = async (
+  movieId: number,
+): Promise<MovieDetailsResponse> => {
   const {data} = await axios.get(
     `https://api.themoviedb.org/3/movie/${movieId}`,
     {
