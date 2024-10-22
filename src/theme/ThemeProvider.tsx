@@ -1,42 +1,29 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  ReactNode,
-  useMemo,
-  FC,
-} from 'react';
-import {lightTheme, darkTheme, ThemeType} from './theme';
+import React, {createContext, ReactNode, FC} from 'react';
+import {Theme} from '@react-navigation/native';
 
 interface ThemeContextType {
-  theme: ThemeType;
+  theme: Theme;
   toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined,
+);
 
 interface ThemeProviderProps {
+  theme: Theme;
+  toggleTheme: () => void;
   children: ReactNode;
 }
 
-export const ThemeProvider: FC<ThemeProviderProps> = ({children}) => {
-  const [theme, setTheme] = useState<ThemeType>(lightTheme);
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === lightTheme ? darkTheme : lightTheme));
-  };
-
-  const value = useMemo(() => ({theme, toggleTheme}), [theme]);
-
+export const ThemeProvider: FC<ThemeProviderProps> = ({
+  theme,
+  toggleTheme,
+  children,
+}) => {
   return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{theme, toggleTheme}}>
+      {children}
+    </ThemeContext.Provider>
   );
-};
-
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
 };

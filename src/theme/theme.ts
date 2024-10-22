@@ -1,26 +1,21 @@
-export interface ThemeType {
-  colors: {
-    background: string;
-    text: string;
-    primary: string;
-    secondary: string;
-  };
-}
+import {DefaultTheme, DarkTheme, Theme} from '@react-navigation/native';
 
-export const lightTheme: ThemeType = {
+export const lightTheme: Theme = {
+  ...DefaultTheme,
+  dark: false,
   colors: {
-    background: '#ffffff',
-    text: '#000000',
-    primary: '#6200ee',
-    secondary: '#03dac4',
+    ...DefaultTheme.colors,
+    background: 'white',
+    text: 'black',
   },
 };
 
-export const darkTheme: ThemeType = {
+export const darkTheme: Theme = {
+  ...DarkTheme,
+  dark: true,
   colors: {
-    background: '#000000',
-    text: '#ffffff',
-    primary: '#bb86fc',
-    secondary: '#03dac4',
+    ...DarkTheme.colors,
+    background: 'black',
+    text: 'white',
   },
 };

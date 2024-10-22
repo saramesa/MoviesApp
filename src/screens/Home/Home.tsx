@@ -1,17 +1,36 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import {ActivityIndicator, FlatList, Text, View} from 'react-native';
 
-import {useTheme} from '../../theme/ThemeProvider';
+import useGetMovies from '../../hooks/useGetMovies';
 
 const Home = () => {
-  const {theme, toggleTheme} = useTheme();
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    error,
+  } = useGetMovies();
+  console.log('data ', data);
+  if (isLoading) {
+    return <ActivityIndicator />;
+  }
+
+  if (error) {
+    return <Text>Failed to fetch movies</Text>;
+  }
+
+  const movies = data?.pages.flatMap((page) => page.results) || [];
   return (
-    <View style={{backgroundColor: theme.colors.background}}>
-      <Text>Home</Text>
-      <Button
-        title="Change theme"
-        onPress={toggleTheme}
-        color={theme.colors.primary}
+    <View>
+      <FlatList
+        data={movies}
+        renderItem={({ item }) => <Text key={item.id}>{item.title}</Text>}
+        keyExtractor={(item) => item.id.toString()}
+        onEndReached={hasNextPage ? () => fetchNextPage() : undefined}
+        onEndReachedThreshold={0.1}
+        ListFooterComponent={isFetchingNextPage ? <ActivityIndicator /> : null}
       />
     </View>
   );
