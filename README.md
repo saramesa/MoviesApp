@@ -72,19 +72,21 @@ This project is a React Native application that displays a list of popular movie
 
 ## **Project Structure**
 
+```plaintext
 ├── src/
-│ ├── components/ # Reusable UI components
-│ ├── hooks/ # Custom hooks for fetching movie data
-│ ├── navigation/ # Navigation setup using React Navigation
-│ ├── screens/ # Different screens for the app
-│ ├── services/ # API calls and data fetching utilities
-│ ├── helpers/ # Helper functions
-│ ├── theme/ # Theme context and provider
-├── queryKeys # Enum with query keys used in react-query
-│ └── types/ # TypeScript types and interfaces
-├── .env # API key configuration
-├── App.tsx # Main entry point of the app
-└── README.md # Project documentation
+│   ├── components/      # Reusable UI components
+│   ├── hooks/           # Custom hooks for fetching movie data
+│   ├── navigation/      # Navigation setup using React Navigation
+│   ├── screens/         # Different screens for the app
+│   ├── services/        # API calls and data fetching utilities
+│   ├── helpers/         # Helper functions
+│   ├── theme/           # Theme context and provider
+│   ├── queryKeys        # Enum with query keys used in react-query
+│   └── types/           # TypeScript types and interfaces
+├── .env                 # API key configuration
+├── App.tsx              # Main entry point of the app
+└── README.md            # Project documentation
+```
 
 ## **Features Implementation**
 
