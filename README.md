@@ -1,79 +1,100 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# **MoviesApp**
 
-# Getting Started
+This project is a React Native application that displays a list of popular movies and allows users to view detailed information about each movie. The app uses **React Navigation** for navigation, and **React Query** for efficient data fetching,. Development was done on a **Windows machine**, and compatibility with iPhone devices is untested.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## **Features**
+- Display a list of popular movies using **The Movie Database (TMDb) API**.
+- View detailed information about each movie, such as release date, popularity, and description.
+- Support for **dark mode** and **light mode** themes, automatically toggled based on device settings.
+- Error handling for network issues using **React Query**.
+  
+## **Technologies**
+- **React Native** (with TypeScript)
+- **React Navigation** for navigation
+- **React Query** for fetching and caching movie data
+- **Axios** for API requests
+- **Theme management** using `Appearance` API and context
+- **Jest** and **React Native Testing Library** for unit tests
+- **ESLint** and **Prettier** for code quality and formatting
 
-## Step 1: Start the Metro Server
+## **Installation**
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### **Prerequisites**
+- Node.js (v14+)
+- npm or Yarn package manager
+- Android Studio and Android SDK (if running on an Android emulator)
+- Xcode and iOS simulator (if running on macOS for iOS)
+- A TMDb API key (you can get one at [TMDb](https://www.themoviedb.org/))
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### **Setup**
 
-```bash
-# using npm
-npm start
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/saramesa/MoviesApp.git
+    cd moviesapp
+    ```
 
-# OR using Yarn
-yarn start
-```
+2. **Install dependencies:**
+    ```bash
+    npm install
+    ```
+    Or
+   ```bash
+    yarn
+    ```
 
-## Step 2: Start your Application
+3. **Set up environment variables:**
+    - Create a `.env` file in the root of your project:
+    ```bash
+    TMDB_API_KEY=tmdb_api_key
+    ```
+    Replace `tmdb_api_key` with your actual API key from TMDb.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+4. **Run the app:**
+    - For Android:
+      ```bash
+      npm run android
+      ```
+    - For iOS (if testing on macOS, note that I haven't tested on iPhone):
+      ```bash
+      npm run ios
+      ```
 
-### For Android
+## **Project Structure**
 
-```bash
-# using npm
-npm run android
+. ├── src/ │ ├── components/ # Reusable UI components │ ├── hooks/ # Custom hooks for fetching movie data │ ├── navigation/ # Navigation setup using React Navigation │ ├── screens/ # Different screens for the app │ ├── services/ # API calls and data fetching utilities │ ├── helpers/ # Helper functions │ ├── theme/ # Theme context and provider │ └── types/ # TypeScript types and interfaces ├── .env # API key configuration ├── App.tsx # Main entry point of the app └── README.md # Project documentation
 
-# OR using Yarn
-yarn android
-```
+## **Features Implementation**
 
-### For iOS
+### 1. **Movies List and Movie Details**
+   - The app fetches popular movies from the TMDb API using **React Query**.
+   - The **`MovieItem`** component displays each movie's title and poster, and clicking on a movie navigates to the **`MovieDetailScreen`**, where more information about the selected movie is shown.
 
-```bash
-# using npm
-npm run ios
+### 2. **Dark Mode / Light Mode**
+   - The app uses the **`Appearance`** API to detect the device's current theme and use it accordingly.
+   - If the user changes to dark theme in mobile settings the app should change to dark mode.
+   - A custom **`ThemeContext`** is used to persist theme changes across the app.
 
-# OR using Yarn
-yarn ios
-```
+### 3. **Navigation**
+   - **Movies List**: Displays the list of movies fetched from the API.
+   - **Movies Detail**: Displays more information about the movie you just clicked.
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+### 4. **Error Handling**
+   - Basic error handling is implemented using **React Query**. If a network issue occurs while fetching data, an error message is displayed to the user via the **`ErrorComponent`**.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+### 5. **Testing**
+   - Unit tests are written using **Jest** and **React Native Testing Library** for various components, hooks, and screens.
 
-## Step 3: Modifying your App
+## **Next Steps**
 
-Now that you have successfully run the app, let's modify it.
+1. **Complete the Remaining Unit Tests**
+   - Write comprehensive tests for all components, especially those involving navigation and API calls.
+   
+2. **Implement End-to-End (E2E) Testing**
+   - Use **Cypress** to implement end-to-end testing to ensure all user flows work as expected.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+3. **Add Internationalization (i18n)**
+   - Implement **i18n** to support multiple languages for a better global user experience.
+   - Use **react-i18next** for this.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+4. **Optimize for iOS**
