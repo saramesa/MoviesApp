@@ -9,11 +9,11 @@ import CustomText from '../CustomText';
 import {MainStackParamList} from '../../navigation/types';
 import {getImageUri} from '../../helpers/getImageUri';
 
-interface MovieItemProps {
+interface MovieCardProps {
   movie: Movie;
 }
 
-const MovieItem: FC<MovieItemProps> = ({movie}) => {
+const MovieCard: FC<MovieCardProps> = ({movie}) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const handleOnCardPress = (movieId: number) => {
@@ -22,10 +22,12 @@ const MovieItem: FC<MovieItemProps> = ({movie}) => {
 
   return (
     <TouchableOpacity
+      testID="movie-card"
       style={styles.card}
       onPress={() => handleOnCardPress(movie.id)}>
       {movie.poster_path && (
         <Image
+          accessibilityLabel="movie poster"
           source={{
             uri: getImageUri(movie.poster_path),
           }}
@@ -40,4 +42,4 @@ const MovieItem: FC<MovieItemProps> = ({movie}) => {
   );
 };
 
-export default MovieItem;
+export default MovieCard;

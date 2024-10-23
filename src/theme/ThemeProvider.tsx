@@ -1,4 +1,4 @@
-import React, {createContext, ReactNode, FC} from 'react';
+import React, {createContext, ReactNode, FC, useMemo} from 'react';
 import {Theme} from '@react-navigation/native';
 
 interface ThemeContextType {
@@ -21,9 +21,8 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   toggleTheme,
   children,
 }) => {
+  const value = useMemo(() => ({theme, toggleTheme}), [theme, toggleTheme]);
   return (
-    <ThemeContext.Provider value={{theme, toggleTheme}}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };

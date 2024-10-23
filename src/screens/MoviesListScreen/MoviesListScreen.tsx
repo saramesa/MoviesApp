@@ -3,10 +3,9 @@ import {ActivityIndicator} from 'react-native';
 
 import useGetMovies from '../../hooks/useGetMovies';
 import MoviesList from '../../components/MoviesList';
-import CustomText from '../../components/CustomText';
 import ErrorComponent from '../../components/ErrorComponent';
 
-const Home = () => {
+const MoviesListScreen = () => {
   const {
     data,
     fetchNextPage,
@@ -36,4 +35,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MoviesListScreen;

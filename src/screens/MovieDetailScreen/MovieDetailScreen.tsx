@@ -20,7 +20,7 @@ const MovieDetailScreen = () => {
   const {data, isLoading, error} = useGetMovieDetails(movieId);
 
   if (isLoading) {
-    return <ActivityIndicator />;
+    return <ActivityIndicator testID="indicator" />;
   }
 
   if (error) {

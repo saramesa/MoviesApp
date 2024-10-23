@@ -16,10 +16,9 @@ const fetchMovies = async (page: number): Promise<MoviesResponse> => {
   );
 
   if (!data) {
-    throw new Error('Network response was not ok');
+    throw new Error('Error fetching movies');
   }
   return data;
 };
 
 export default fetchMovies;
-
