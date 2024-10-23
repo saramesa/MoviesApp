@@ -14,14 +14,16 @@ import {
   DefaultTheme,
 } from '@react-navigation/native';
 
-import {ThemeProvider} from './src/theme/ThemeProvider';
+import {ThemeProvider, ThemeType} from './src/theme/ThemeProvider';
 import AppNavigator from './src/navigation/AppNavigator';
 
 const queryClient = new QueryClient();
 
 const App = () => {
   const initialColorScheme = Appearance.getColorScheme();
-  const [isDarkMode, setIsDarkMode] = useState(initialColorScheme === 'dark');
+  const [isDarkMode, setIsDarkMode] = useState(
+    initialColorScheme === ThemeType.DARK,
+  );
   const theme = isDarkMode ? DarkTheme : DefaultTheme;
   const toggleTheme = useCallback(() => {
     setIsDarkMode(prevMode => !prevMode);
@@ -29,7 +31,7 @@ const App = () => {
 
   useEffect(() => {
     const subscription = Appearance.addChangeListener(({colorScheme}) => {
-      setIsDarkMode(colorScheme === 'dark');
+      setIsDarkMode(colorScheme === ThemeType.DARK);
     });
 
     return () => subscription.remove();

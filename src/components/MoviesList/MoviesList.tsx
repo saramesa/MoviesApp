@@ -1,13 +1,20 @@
 import React, {FC} from 'react';
 import {ActivityIndicator, FlatList} from 'react-native';
+import {
+  FetchNextPageOptions,
+  UseInfiniteQueryResult,
+} from '@tanstack/react-query';
 
 import MovieCard from '../MovieCard';
-//TO DO type this
+import {Movie} from '../../services/fetchMovies/types';
+
 interface MoviesListProps {
-  movies: any;
-  fetchNextPage: any;
-  isFetchingNextPage: any;
-  hasNextPage: any;
+  movies: Movie[];
+  fetchNextPage: (
+    options?: FetchNextPageOptions,
+  ) => Promise<UseInfiniteQueryResult>;
+  isFetchingNextPage: boolean;
+  hasNextPage?: boolean;
 }
 
 const MoviesList: FC<MoviesListProps> = ({
@@ -20,7 +27,7 @@ const MoviesList: FC<MoviesListProps> = ({
     <FlatList
       data={movies}
       keyExtractor={item => `${item.id.toString()}-${item.title}`}
-      renderItem={({item}) => <MovieCard movie={item}/>}
+      renderItem={({item}) => <MovieCard movie={item} />}
       onEndReached={hasNextPage ? () => fetchNextPage() : undefined}
       onEndReachedThreshold={0.1}
       ListFooterComponent={isFetchingNextPage ? <ActivityIndicator /> : null}

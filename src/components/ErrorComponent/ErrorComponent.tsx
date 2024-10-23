@@ -9,7 +9,6 @@ interface ErrorComponentProps {
 }
 
 const ErrorComponent: FC<ErrorComponentProps> = ({error}) => {
-  console.log('error ', error)
   return (
     <View style={styles.errorContainer}>
       <CustomText style={styles.errorText}>{error.message}</CustomText>

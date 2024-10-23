@@ -16,6 +16,10 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
+export enum ThemeType {
+  LIGHT = 'light',
+  DARK = 'dark',
+}
 export const ThemeProvider: FC<ThemeProviderProps> = ({
   theme,
   toggleTheme,
